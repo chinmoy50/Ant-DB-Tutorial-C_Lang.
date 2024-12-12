@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<project name="DB-Tutorial-C_Lang" default="build" basedir=".">
+
+    <!-- Define properties -->
+    <property name="src.dir" value="spec" />
+    <property name="build.dir" value="build" />
+    <property name="bin.dir" value="bin" />
+
+    <!-- Clean target -->
+    <target name="clean">
+        <echo message="Cleaning build and bin directories..." />
+        <delete dir="${build.dir}" />
+        <delete dir="${bin.dir}" />
+    </target>
+
+    <!-- Prepare target -->
+    <target name="prepare">
+        <echo message="Preparing directories..." />
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${bin.dir}" />
+    </target>
+
+    <!-- Compile target -->
+    <target name="compile" depends="prepare">
+        <echo message="Compiling source files..." />
+        <apply executable="gcc" failonerror="true">
+            <fileset dir="${src.dir}">
+                <include name="**/*.c" />
+            </fileset>
+            <arg value="-o" />
+            <arg value="${bin.dir}/app" />
+        </apply>
+    </target>
+
+    <!-- Build target -->
+    <target name="build" depends="compile">
+        <echo message="Build process completed. Executable is in the bin directory." />
+    </target>
+
+</project>
